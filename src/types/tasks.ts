@@ -13,3 +13,10 @@ export type TTasksData = {
     removedTasks: TTask[],
     editableItem: TTask
 };
+
+export enum ETaskStatus {
+    PENDING = 'pending',
+    COMPLETED = 'completed',
+    OVERDUE = 'overdue',
+    REMOVED = 'removed',
+}

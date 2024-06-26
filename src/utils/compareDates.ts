@@ -1,5 +1,5 @@
-import dayjs from "dayjs";
-import { ETaskStatus } from "../components/Form/constants";
+import dayjs from 'dayjs';
+import { ETaskStatus } from '../types/tasks';
 
 export const compareDates = (date: Date) => {
     const today = dayjs();

@@ -4,6 +4,8 @@ import { createRoot } from 'react-dom/client';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { store } from './store/store';
+import { StyledEngineProvider } from '@mui/material';
+import BasicModal from './components/Modal';
 import App from './App';
 import './index.css';
 
@@ -12,9 +14,12 @@ const root = createRoot(
 );
 root.render(
   <LocalizationProvider dateAdapter={AdapterDayjs}>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <StyledEngineProvider injectFirst>
+      <Provider store={store}>
+        <App />
+        <BasicModal />
+      </Provider>
+    </StyledEngineProvider>
   </LocalizationProvider>
 );
 

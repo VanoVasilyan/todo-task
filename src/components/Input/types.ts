@@ -1,4 +1,4 @@
-import { TextFieldVariants } from "@mui/material";
+import { TextFieldVariants } from '@mui/material';
 
 export type InputType = 'datePicker' | 'default';
 
