@@ -1,5 +1,6 @@
 export interface ButtonProps {
     children: string;
     onClick: () => void;
-    sx: any
+    sx: any,
+    variant?: string
 }
