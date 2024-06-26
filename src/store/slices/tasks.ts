@@ -45,8 +45,10 @@ export const tasksSlice = createSlice({
             }
         },
         editTask: (state, action) => {
+            const newStateForTasks = current(state.tasks).filter(el => el.id !== action.payload?.id);
             return {
                 ...state,
+                tasks: newStateForTasks,
                 editableItem: action.payload
             }
         }

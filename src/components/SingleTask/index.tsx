@@ -4,47 +4,25 @@ import { Accordion, AccordionDetails, AccordionSummary, Box, Checkbox, FormContr
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { useTasksAction } from '../../store/slices/tasks';
+import { useSingleTask } from '../../hooks/useSingleTask';
+import { ETaskStatus } from '../../types/tasks';
 import { SingleTaskProps } from './types';
 
 
 const SingleTask: FC<SingleTaskProps> = ({ id, title, description, deadline, status }) => {
-    const { setTaskCompleted, deleteTask, editTask } = useTasksAction();
-
-    const handleCheckStatus = (e: {
-        preventDefault(): unknown; stopPropagation: () => void;
-    }) => {
-        e.stopPropagation();
-        e.preventDefault();
-        if (status === 'overdue' || status === 'completed') {
-            return
-        };
-        setTaskCompleted(id);
-    }
-
-    const handleEditTask = (e: {
-        stopPropagation(): unknown; preventDefault: () => void;
-    }) => {
-        e.preventDefault();
-        e.stopPropagation();
-        editTask({ title, description, deadline });
-        deleteTask(id);
-    }
-
-    const handleRemoveTask = (e: {
-        stopPropagation(): unknown; preventDefault: () => void;
-    }) => {
-        e.preventDefault();
-        e.stopPropagation();
-        deleteTask(id)
-    }
+    const {
+        handleCheckStatus,
+        handleEditTask,
+        handleRemoveTask,
+        capitalizeFirstLetter
+    } = useSingleTask({ id, title, description, deadline, status })
 
     return (
         <Accordion>
             <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel2-content"
-                id="panel2-header"
+                aria-controls='panel2-content'
+                id='panel2-header'
             >
                 <Box sx={{
                     width: '100%',
@@ -56,7 +34,10 @@ const SingleTask: FC<SingleTaskProps> = ({ id, title, description, deadline, sta
                         onClick={handleCheckStatus}
                         label={<Typography sx={{
                             maxWidth: '250px',
-                            minWidth: '250px',
+                            minWidth: {
+                                xs: 'auto',
+                                md: '250px'
+                            },
                             display: '-webkit-box',
                             textAlign: 'start',
                             WebkitLineClamp: 1,
@@ -65,22 +46,33 @@ const SingleTask: FC<SingleTaskProps> = ({ id, title, description, deadline, sta
                             WebkitBoxOrient: 'vertical',
                             overflow: 'hidden'
                         }}>{title}</Typography>}
-                        control={<Checkbox checked={status === 'completed'} color="success" />}
+                        control={<Checkbox checked={status === ETaskStatus.COMPLETED} color='success' />}
                     />
                     <Typography sx={{
                         background: '#9BC1BC',
                         color: '#FFFFFF',
                         padding: '8px',
-                        borderRadius: '10px'
+                        borderRadius: '10px',
+                        display: {
+                            md: 'block',
+                            sm: 'block',
+                            xs: 'none'
+                        }
                     }}>
-                        {status}
+                        {capitalizeFirstLetter(status)}
                     </Typography>
-                    <Typography>
+                    <Typography sx={{
+                        display: {
+                            md: 'block',
+                            sm: 'none',
+                            xs: 'none'
+                        }
+                    }}>
                         {dayjs(deadline).format('DD-MM-YY')}
                     </Typography>
                     <Box sx={{ display: 'flex', gap: '10px', marginTop: '5px' }}>
                         <Typography onClick={handleEditTask}>
-                            <EditIcon color="success" />
+                            <EditIcon color='success' />
                         </Typography>
                         <Typography onClick={handleRemoveTask}>
                             <DeleteIcon sx={{ color: 'red' }} />
