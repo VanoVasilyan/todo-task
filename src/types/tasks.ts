@@ -1,15 +1,15 @@
-import { Dayjs } from "dayjs";
-
-export type TTaskStatus = 'pending' | 'completed' | 'overdue' | 'removed';
+import { Dayjs } from 'dayjs';
 
 export type TTask = {
     id: number;
     title: string;
     description: string;
     deadline: Dayjs | string;
-    status: TTaskStatus
+    status: string
 }
 
 export type TTasksData = {
-    tasks: TTask[]
+    tasks: TTask[],
+    removedTasks: TTask[],
+    editableItem: TTask
 };

@@ -5,7 +5,7 @@ import TasksList from './components/TasksList';
 
 const App: FC = () => {
   return (
-    <Container className="App">
+    <Container sx={{ display: 'flex', flexDirection: 'column' }}>
       <Form />
       <TasksList />
     </Container>
