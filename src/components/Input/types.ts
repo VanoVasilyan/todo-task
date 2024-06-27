@@ -14,3 +14,8 @@ export interface InputProps {
     error?: string;
     type?: InputType;
 }
+
+export enum EInputType {
+    DATEPICKER = 'datePicker',
+    DEFAULT = 'default'
+}

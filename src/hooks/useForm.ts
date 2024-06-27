@@ -2,6 +2,7 @@ import { useFormik } from 'formik';
 import { useTasksAction, useTasksSelector } from '../store/slices/tasks';
 import { validationSchema } from '../components/Form/validation';
 import { compareDates } from '../utils/compareDates';
+import { useEffect } from 'react';
 
 export const useForm = () => {
     const { addTask, editTask } = useTasksAction();
@@ -29,6 +30,15 @@ export const useForm = () => {
             editTask({});
         }
     })
+
+    useEffect(() => {
+        if (editableItem.title && editableItem.description && editableItem.deadline) {
+            formik.setFieldValue('title', editableItem.title)
+            formik.setFieldValue('description', editableItem.description)
+            formik.setFieldValue('date', editableItem.deadline)
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [editableItem])
 
     return {
         formik,

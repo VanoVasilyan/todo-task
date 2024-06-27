@@ -1,49 +1,55 @@
-import { useCallback } from 'react';
+import { useMemo } from 'react';
 import { ETaskStatus } from '../types/tasks';
 import { capitalizeFirstLetter } from '../utils/capitalizeFirstLetter';
-import { useTasksAction } from '../store/slices/tasks';
+import { useTasksAction, useTasksSelector } from '../store/slices/tasks';
 import { SingleTaskProps } from '../components/SingleTask/types';
 
 export const useSingleTask = ({ status, id, title, description, deadline }: SingleTaskProps) => {
     const { setTaskCompleted, deleteTask, editTask } = useTasksAction();
+    const { editableItem } = useTasksSelector();
 
-    const handleCheckStatus = useCallback((e: {
-        preventDefault(): unknown; stopPropagation: () => void;
-    }) => {
+    const handleCheckStatus = (e: { stopPropagation: () => void }) => {
         e.stopPropagation();
-        e.preventDefault();
+
         if (status === ETaskStatus.OVERDUE || status === ETaskStatus.COMPLETED || status === ETaskStatus.REMOVED) {
             return
         };
         setTaskCompleted(id);
-    }, [id, setTaskCompleted, status])
+    };
 
-    const handleEditTask = useCallback((e: {
-        stopPropagation(): unknown; preventDefault: () => void;
-    }) => {
-        e.preventDefault();
+    const handleEditTask = (e: { stopPropagation: () => void }) => {
         e.stopPropagation();
-        if (status === ETaskStatus.REMOVED) {
+
+        if (status === ETaskStatus.REMOVED || editableItem?.title) {
             return
         }
         editTask({ id, title, description, deadline });
-    }, [deadline, description, editTask, id, status, title])
+    };
 
-    const handleRemoveTask = useCallback((e: {
-        stopPropagation(): unknown; preventDefault: () => void;
-    }) => {
-        e.preventDefault();
+    const handleRemoveTask = (e: { stopPropagation: () => void }) => {
         e.stopPropagation();
+
         if (status === ETaskStatus.REMOVED) {
             return
         }
         deleteTask(id)
-    }, [deleteTask, id, status])
+    };
+
+    const statusBackgroundColor = useMemo(() => {
+        if (status === ETaskStatus.PENDING) {
+            return '#FF6C37'
+        } else if (status === ETaskStatus.COMPLETED) {
+            return '#50C800'
+        } else {
+            return '#BB0000'
+        }
+    }, [status])
 
     return {
         handleCheckStatus,
         handleEditTask,
         handleRemoveTask,
-        capitalizeFirstLetter
+        capitalizeFirstLetter,
+        statusBackgroundColor
     }
 }

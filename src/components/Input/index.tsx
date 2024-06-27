@@ -1,13 +1,13 @@
 import React, { FC } from 'react';
 import { TextField, Typography } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers';
-import { InputProps } from './types';
+import { EInputType, InputProps } from './types';
 
-const Input: FC<InputProps> = ({ id, onChange, label, value, multiline, sx, variant = 'outlined', name, error, type = 'default' }) => {
+const Input: FC<InputProps> = ({ id, onChange, label, value, multiline, sx, variant = 'outlined', name, error, type = EInputType.DEFAULT }) => {
     return (
         <>
             {
-                type === 'datePicker' ? (
+                type === EInputType.DATEPICKER ? (
                     <DatePicker
                         name={name}
                         label={label}

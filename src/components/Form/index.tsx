@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 import { Container } from '@mui/material';
 import { useForm } from '../../hooks/useForm';
 import Input from '../Input';
@@ -7,16 +7,8 @@ import Button from '../Button';
 const Form: FC = () => {
     const { formik, editableItem } = useForm();
 
-    useEffect(() => {
-        if (editableItem.title && editableItem.description && editableItem.deadline) {
-            formik.setFieldValue('title', editableItem.title)
-            formik.setFieldValue('description', editableItem.description)
-            formik.setFieldValue('date', editableItem.deadline)
-        }
-    }, [editableItem])
-
     return (
-        <Container maxWidth='sm' sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', padding: '20px' }}>
+        <Container maxWidth='sm' sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', marginTop: '20px' }}>
             <Input id='title' name='title' label='Title' error={formik.errors.title} value={formik.values.title} onChange={formik.handleChange} />
             <Input id='description' name='description' error={formik.errors.description} sx={{ marginTop: '15px' }} label='Description' multiline value={formik.values.description}
                 onChange={formik.handleChange} />
