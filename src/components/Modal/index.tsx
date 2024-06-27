@@ -1,12 +1,12 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import { Container } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Modal from '@mui/material/Modal';
-import { Container } from '@mui/material';
-import { useTasksSelector } from '../../store/slices/tasks';
+import { useModal } from '../../hooks/useModal';
 import SingleTask from '../SingleTask';
 
 const style = {
@@ -19,21 +19,44 @@ const style = {
     bgcolor: 'background.paper',
     boxShadow: 24,
     p: 4,
+    mr: 3
 };
 
 const BasicModal: FC = () => {
-    const [isOpen, setIsOpen] = useState(false);
-    const { removedTasks } = useTasksSelector();
+    const {
+        isModalOpen,
+        removedTasks,
+        handleOpenModal,
+        handleCloseModal
+    } = useModal();
 
     return (
-        <Container sx={{ position: 'absolute', bottom: '10%', right: '0' }}>
-            <Button sx={{ position: 'absolute', right: '10px' }} onClick={() => setIsOpen(true)}>
-                <DeleteIcon style={{ fontSize: '50px', color: 'red' }} />
+        <Container sx={{
+            position: 'absolute',
+            top: {
+                lg: '5px',
+                md: '5px',
+                sm: '220px',
+                xs: '220px'
+            },
+            right: '0'
+        }}>
+            <Button sx={{
+                position: 'absolute',
+                right: '10px',
+                '&:hover': {
+                    backgroundColor: '#FFF'
+                }
+            }} onClick={handleOpenModal}>
+                <DeleteIcon sx={{
+                    fontSize: '50px',
+                    color: 'red',
+                }} />
                 <Box component='span' sx={{ position: 'absolute', color: '#FFFFFF' }}>{removedTasks?.length}</Box>
             </Button>
             <Modal
-                open={isOpen}
-                onClose={() => setIsOpen(false)}
+                open={isModalOpen}
+                onClose={handleCloseModal}
                 aria-labelledby='modal-modal-title'
                 aria-describedby='modal-modal-description'
             >
@@ -48,7 +71,7 @@ const BasicModal: FC = () => {
                         '&:hover': {
                             backgroundColor: '#FFF'
                         },
-                    }} onClick={() => setIsOpen(false)}>
+                    }} onClick={handleCloseModal}>
                         <CloseIcon />
                     </Button>
                     {!!removedTasks.length ?
@@ -56,7 +79,12 @@ const BasicModal: FC = () => {
                             <Typography variant='h4' sx={{
                                 textAlign: 'center',
                                 color: '#0288D1',
-                                fontSize: '38px',
+                                fontSize: {
+                                    lg: '38px',
+                                    md: '34px',
+                                    sm: '20px',
+                                    xs: '18px'
+                                },
                                 marginBottom: '40px',
                                 fontWeight: 700
                             }}>Removed Tasks</Typography>

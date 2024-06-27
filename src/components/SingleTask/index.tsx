@@ -8,13 +8,13 @@ import { useSingleTask } from '../../hooks/useSingleTask';
 import { ETaskStatus } from '../../types/tasks';
 import { SingleTaskProps } from './types';
 
-
 const SingleTask: FC<SingleTaskProps> = ({ id, title, description, deadline, status }) => {
     const {
         handleCheckStatus,
         handleEditTask,
         handleRemoveTask,
-        capitalizeFirstLetter
+        capitalizeFirstLetter,
+        statusBackgroundColor
     } = useSingleTask({ id, title, description, deadline, status })
 
     return (
@@ -28,7 +28,7 @@ const SingleTask: FC<SingleTaskProps> = ({ id, title, description, deadline, sta
                     width: '100%',
                     display: 'flex',
                     alignItems: 'center',
-                    justifyContent: 'space-between'
+                    justifyContent: 'space-between',
                 }}>
                     <FormControlLabel
                         onClick={handleCheckStatus}
@@ -44,27 +44,39 @@ const SingleTask: FC<SingleTaskProps> = ({ id, title, description, deadline, sta
                             wordBreak: 'break-all',
                             WebkitBoxDecorationBreak: 'revert',
                             WebkitBoxOrient: 'vertical',
-                            overflow: 'hidden'
+                            overflow: 'hidden',
                         }}>{title}</Typography>}
                         control={<Checkbox checked={status === ETaskStatus.COMPLETED} color='success' />}
                     />
                     <Typography sx={{
-                        background: '#9BC1BC',
+                        backgroundColor: statusBackgroundColor,
                         color: '#FFFFFF',
-                        padding: '8px',
-                        borderRadius: '10px',
+                        fontSize: {
+                            md: '16px',
+                            sm: '14px',
+                            xs: '14px'
+                        },
+                        padding: {
+                            lg: '8px',
+                            md: '8px',
+                            sm: '5px',
+                            xs: '5px'
+                        },
                         display: {
+                            lg: 'block',
                             md: 'block',
                             sm: 'block',
-                            xs: 'none'
-                        }
+                            xs: status === ETaskStatus.COMPLETED ? 'none' : 'block'
+                        },
+                        borderRadius: '10px',
                     }}>
                         {capitalizeFirstLetter(status)}
                     </Typography>
                     <Typography sx={{
                         display: {
+                            lg: 'block',
                             md: 'block',
-                            sm: 'none',
+                            sm: 'block',
                             xs: 'none'
                         }
                     }}>
@@ -80,9 +92,29 @@ const SingleTask: FC<SingleTaskProps> = ({ id, title, description, deadline, sta
                     </Box>
                 </Box>
             </AccordionSummary>
-            <AccordionDetails sx={{ textAlign: 'left', wordBreak: 'break-all' }}>
-                <Typography>
+            <AccordionDetails sx={{ textAlign: 'left', wordBreak: 'break-all', display: 'flex', justifyContent: 'space-between' }}>
+                <Typography sx={{
+                    maxWidth: {
+                        lg: '100%',
+                        md: '100%',
+                        sm: '100%',
+                        xs: '350px'
+                    },
+                    marginRight: '20px'
+                }}>
                     {description}
+                </Typography>
+                <Typography sx={{
+                    display: {
+                        lg: 'none',
+                        md: 'none',
+                        sm: 'none',
+                        xs: 'block'
+                    },
+                    minWidth: '70px',
+                    maxWidth: '70px'
+                }}>
+                    {dayjs(deadline).format('DD-MM-YY')}
                 </Typography>
             </AccordionDetails>
         </Accordion >
