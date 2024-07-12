@@ -9,4 +9,4 @@ export const compareDates = (date: Date) => {
     } else if (inputDate.isAfter(today, 'day')) {
         return ETaskStatus.PENDING;
     }
-}
+};

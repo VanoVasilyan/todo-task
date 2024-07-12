@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
-import Button, { ButtonProps } from '@mui/material/Button';
+import Button from '@mui/material/Button';
+import { IButtonProps } from './types';
 
-const ButtonCustom: FC<ButtonProps> = ({ children, onClick, sx, variant = 'contained', color = 'info' }) => {
+const ButtonCustom: FC<IButtonProps> = ({ children, sx, variant = 'contained', onClick }) => {
     return (
-        <Button sx={sx} color={color} onClick={onClick} variant={variant}>
+        <Button sx={sx} onClick={onClick} variant={variant}>
             {children}
         </Button>
     )

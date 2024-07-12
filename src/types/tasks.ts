@@ -6,7 +6,7 @@ export type TTask = {
     description: string;
     deadline: Dayjs | string;
     status: string
-}
+};
 
 export type TTasksData = {
     tasks: TTask[],
@@ -19,4 +19,4 @@ export enum ETaskStatus {
     COMPLETED = 'completed',
     OVERDUE = 'overdue',
     REMOVED = 'removed',
-}
+};

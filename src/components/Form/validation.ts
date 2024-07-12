@@ -13,4 +13,4 @@ export const validationSchema = () => {
         date: Yup.string()
             .required('Date is required')
     })
-}
+};

@@ -31,6 +31,11 @@ export const useForm = () => {
         }
     })
 
+    const handleDateChange = (newValue: string) => {
+        formik.setFieldValue('date', newValue);
+        formik.setFieldError('date', '');
+    }
+
     useEffect(() => {
         if (editableItem.title && editableItem.description && editableItem.deadline) {
             formik.setFieldValue('title', editableItem.title)
@@ -43,5 +48,6 @@ export const useForm = () => {
     return {
         formik,
         editableItem,
+        handleDateChange,
     }
 }

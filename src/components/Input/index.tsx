@@ -30,6 +30,6 @@ const Input: FC<InputProps> = ({ id, onChange, label, value, multiline, sx, vari
             {error && <Typography color='red'>{error}</Typography>}
         </>
     )
-}
+};
 
 export default Input

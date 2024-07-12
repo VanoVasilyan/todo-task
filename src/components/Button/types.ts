@@ -1,7 +1,11 @@
-export interface ButtonProps {
+import { Theme } from '@emotion/react';
+import { ButtonPropsVariantOverrides, SxProps } from '@mui/material';
+import { OverridableStringUnion } from '@mui/types';
+
+export interface IButtonProps {
     children: string;
-    onClick: () => void;
-    sx: any,
+    sx: SxProps<Theme>,
     color?: string;
-    variant?: string
-}
+    onClick:  () => void;
+    variant?: OverridableStringUnion<'text' | 'outlined' | 'contained', ButtonPropsVariantOverrides>;
+};

@@ -10,6 +10,6 @@ const App: FC = () => {
       <TasksList />
     </Container>
   );
-}
+};
 
-export default App;
+export default App

@@ -22,4 +22,3 @@ root.render(
     </StyledEngineProvider>
   </LocalizationProvider>
 );
-

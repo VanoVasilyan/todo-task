@@ -119,6 +119,6 @@ const SingleTask: FC<SingleTaskProps> = ({ id, title, description, deadline, sta
             </AccordionDetails>
         </Accordion >
     )
-}
+};
 
 export default SingleTask
