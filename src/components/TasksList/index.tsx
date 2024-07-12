@@ -58,6 +58,7 @@ const TasksList: FC = () => {
                             }
                         }}>
                             <img
+                                loading='lazy'
                                 src={EmptyImage}
                                 alt={'Empty List'}
                                 style={{ borderRadius: '25px' }}
@@ -80,6 +81,6 @@ const TasksList: FC = () => {
             }
         </Container>
     )
-}
+};
 
 export default TasksList

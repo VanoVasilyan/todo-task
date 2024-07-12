@@ -9,19 +9,6 @@ import Modal from '@mui/material/Modal';
 import { useModal } from '../../hooks/useModal';
 import SingleTask from '../SingleTask';
 
-const style = {
-    position: 'relative',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    maxWidth: 1200,
-    borderRadius: '20px',
-    bgcolor: 'background.paper',
-    boxShadow: 24,
-    p: 4,
-    mr: 3
-};
-
 const BasicModal: FC = () => {
     const {
         isModalOpen,
@@ -60,7 +47,18 @@ const BasicModal: FC = () => {
                 aria-labelledby='modal-modal-title'
                 aria-describedby='modal-modal-description'
             >
-                <Box sx={style}>
+                <Box sx={{
+                    position: 'relative',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    maxWidth: 1200,
+                    borderRadius: '20px',
+                    bgcolor: 'background.paper',
+                    boxShadow: 24,
+                    p: 4,
+                    mr: 3
+                }}>
                     <Button sx={{
                         position: 'absolute',
                         top: 0,

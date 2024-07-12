@@ -52,4 +52,4 @@ export const useSingleTask = ({ status, id, title, description, deadline }: Sing
         capitalizeFirstLetter,
         statusBackgroundColor
     }
-}
+};

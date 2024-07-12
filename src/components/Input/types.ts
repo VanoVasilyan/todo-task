@@ -1,4 +1,5 @@
-import { TextFieldVariants } from '@mui/material';
+import { Theme } from '@emotion/react';
+import { SxProps, TextFieldVariants } from '@mui/material';
 
 export type InputType = 'datePicker' | 'default';
 
@@ -8,14 +9,14 @@ export interface InputProps {
     value: any;
     name: string;
     multiline?: boolean;
-    onChange: (e?: any) => void;
+    onChange: (e: any) => void;
     variant?: TextFieldVariants;
-    sx?: any;
+    sx?: SxProps<Theme>;
     error?: string;
     type?: InputType;
-}
+};
 
 export enum EInputType {
     DATEPICKER = 'datePicker',
     DEFAULT = 'default'
-}
+};

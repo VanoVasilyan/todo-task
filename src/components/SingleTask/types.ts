@@ -6,4 +6,4 @@ export interface SingleTaskProps {
     description: string;
     deadline: Dayjs | string;
     status: string
-}
+};
